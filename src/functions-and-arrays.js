@@ -1,5 +1,5 @@
 // Progression #1: Greatest of the two numbers
-function greatestofTwoNumbers(num1,num2){
+function greatestOfTwoNumbers(num1,num2){
    if (num1>num2){
     return num1
    }
@@ -13,16 +13,95 @@ function greatestofTwoNumbers(num1,num2){
 
 // Progression #2: The lengthy word
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
+function findScaryWord(words){
+  if (words.length == 0){
+    return null
+  }
+  else if (words.length == 1){
+    return words[0]
+  }
+  else{
+    var max=words[0].length
+    var pos=0
+    for (var i=1;i<words.length;i++){
+       if (words[i].length > max){
+        max = words[i].length
+        pos = i
+       }
+    }
+    return words[pos]
+  }
 
+}
 // Progression #3: Net Price
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
+function netPrice(numbers){
+  var sum = 0
+  if (numbers.length == 0) {
+      return 0
+  } else {
+    for (var num of numbers) {
+      sum+=num
+    }
+    return sum
+  }
+}
+
+// Progression #3.1: bonus
+function add(arr){
+  var sum = 0
+  if (arr.length == 0) {
+    return 0
+  }
+  else{
+    for(let ele of arr)
+    {
+      var type = typeof(ele)
+      if (type == "object"){
+        throw new Error("Unsupported data type sir or ma'am");
+    }
+    else if (type == "number"){
+      sum+=ele
+    }
+    else if (type == "string"){
+      sum+=ele.length
+    }
+    else if (type == "boolean"){
+      sum+=Number(ele)
+    }
+ }
+  }
+  return sum
+}
 
 // Progression #4: Calculate the average
 // Progression 4.1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
-
+function midPointOfLevels(arr){
+  if (arr.length == 0) {
+    return null
+  }
+  var sum = add(arr)
+  return (sum/arr.length)
+}
 // Progression 4.2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
+function averageWordLength(arr){
+  if (arr.length == 0) {
+    return null
+  }
+  var sum = add(arr)
+  return (sum/arr.length)
+}
+//bonus
+function avg(arr){
+  if (arr.length == 0) {
+    return null
+  }
+  var sum = add(arr)
+  return parseFloat((sum/arr.length).toFixed(2))
+}
+
 
 // Progression #5: Unique arrays
 const wordsUnique = [
@@ -39,9 +118,35 @@ const wordsUnique = [
   'egg',
   'flour'
 ];
-
+function uniqueArray(arr){
+  if (arr.length == 0) {
+    return null
+  }
+  else {
+    for (let i = 0; i < arr.length-1; i++) {
+      for (let j = i+1; j < arr.length; j++) {
+         if (arr[i]===arr[j]) {
+          arr.splice(j,1)
+         }
+      }
+    }
+    return arr
+  }
+}
 // Progression #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
+function searchElement(arr,wrd){
+  if (arr.length == 0) {
+    return null
+  }
+else{
+  for (let i = 0; i < arr.length-1; i++) {
+   if (arr[i] === wrd) {
+     return true
+   }
+}
+}
+}
 
 // Progression #7: Count repetition
 const wordsCount = [
@@ -57,7 +162,20 @@ const wordsCount = [
   'disobedience',
   'matter'
 ];
-
+function howManyTimesElementRepeated(arr,wrd){
+  if (arr.length == 0) {
+    return 0
+  }
+else{
+  var count = 0
+  for (let i = 0; i < arr.length; i++) {
+   if (arr[i] === wrd) {
+      count+=1
+   }
+}
+return count
+}
+}
 // Progression #8: Bonus
 
 const matrix = [
@@ -72,3 +190,25 @@ const matrix = [
   [24, 55, 58, 05, 66, 73, 99, 26, 97, 17],
   [21, 36, 23, 09, 75, 00, 76, 44, 20, 45]
 ];
+function maximumProduct(matrix){
+  var max=0
+  var prodRow=1
+  var prodCol=1
+  for (var i=0; i<matrix.length;i++){
+    //row wise
+    for (num in matrix[i]){
+      prodRow*=num
+    }
+      //columnwise
+      for (var j=0; j<matrix.length;j++){
+        prodCol*=matrix[i][j]
+    }
+    if (prodRow>max) {
+      max = prodRow
+    }
+    if(prodCol>max){
+      max=prodCol
+    }
+  }
+ return max
+}
